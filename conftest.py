@@ -21,7 +21,6 @@ ExpiryMonth = "04"
 ExpiryYear = "2022"
 Code = "123"
 
-
 #XPaths
 Login_URL = "//a[text()='Log in']"
 Email_URL = "//input[@id='Email']"
@@ -54,6 +53,13 @@ Phone_URL = "//input[@id='BillingNewAddress_PhoneNumber']"
 Fax_URL = "//input[@id='BillingNewAddress_FaxNumber']"
 Continue_URL = "//input[@value='Continue']"
 ConfirmOrder_URL = "//input[@value='Confirm']"
+
+PaymentMethod_URL = '//input[@id="paymentmethod_2"]'
+CardHolder_URL = '//input[@id="CardholderName"]'
+CardNumber_URL = '//input[@id="CardNumber"]'
+ExpirationDate_URL = '//select[@id="ExpireMonth"]'
+ExpirationYear_URL = '//select[@id="ExpireYear"]'
+CardCode_URL = '//input[@id="CardCode"]'
 
 
 @pytest.fixture
@@ -119,7 +125,6 @@ def WaitFill(page, url, text):
 def CounterWaitClick(page, url):
     # loop to wait for and click each continue button that appears on the checkout page
     # Ensures that the counter increments so that it uses the next continue button
-    for i in range(4):
+    for i in range(2):
         i += 1
-        #page.locator(url).nth(i).wait_for_selector()
         page.locator(url).nth(i).click()

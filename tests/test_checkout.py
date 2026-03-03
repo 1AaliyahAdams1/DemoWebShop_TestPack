@@ -37,8 +37,22 @@ def test_checkout(browser):
     WaitFill(page, Phone_URL, Phone)
     WaitClick(page, Continue_URL)
 
-    #Shipping Address -> Payment Information
+    #Shipping Address -> Shipping Method
     CounterWaitClick(page, Continue_URL)
+
+    #Payment Method
+    WaitClick(page, PaymentMethod_URL)
+    page.locator(Continue_URL).nth(3).click()
+
+    #Payment Information
+    WaitFill(page, CardHolder_URL, CardHolder)
+    WaitFill(page, CardNumber_URL, CardNumber)
+    WaitClick(page, ExpirationDate_URL)
+    page.select_option(ExpirationDate_URL, value= ExpiryMonth)
+    #WaitClick(page, ExpirationYear_URL)
+    #page.select_option(ExpirationYear_URL, value=ExpiryYear)
+    WaitFill(page, CardCode_URL, Code)
+    page.locator(Continue_URL).nth(4).click()
 
     #Confirm Order
     page.wait_for_selector(ConfirmOrder_URL)

@@ -12,10 +12,10 @@ Assumed order of test cases is register, login and then checkout
 Tradeoffs -
 The loop for CounterWaitClick function hard codes a value for the number of continue buttons present on the page
 For the checkout test case, only filled in the billing details and left default options for the rest of the checkout process
+Left out the part where we put the expiration date in as we cannot register a card that has already expired, the dummy data had the value as 2022
 
 Improvements if given more time -
 Would of created the CounterWaitClick function to be more dynamic with the loop duration and take the amount of continue buttons on the page
-Would of made the checkout test case more fleshed out by adding card payment to the process
-Would of done negative testing for all 3 test cases 
+Would of done negative testing for all 3 test cases
 Checkout function breaks if you reuse same login details because the test assumes that the user starts with an empty cart, if had more time, would make this more dynamic as clear cart if full prior to adding the required item
 Checkout function additionally breaks when reusing same login details after a successful checkout because it saves the previous billing details, if had more time would of made that part more dynamic to check if the user had previous billing details saved before trying to fill in billing details

@@ -2,7 +2,7 @@ Setup steps -
 Install packages from requirements folder
 
 Run command(s) -
-pytest
+pytest tests
 
 Assumptions -
 Assumed that for the checkout process you would only need to successfully check out 1 Digital SLR Camera with no other additional requirements to the test case

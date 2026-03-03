@@ -1,0 +1,4 @@
+# Packages used:
+# pip install pytest-order
+# pip install pytest
+# pip install playwright pytest-playwright

@@ -25,13 +25,12 @@ def test_register(browser):
     WaitClick(page, Register2_URL)
 
     #Checks that page has a success message for registration
-    ValidationText = page.locator("body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div.center-2 > div > div.page-body > div.result").inner_text()
+    ValidationText = page.locator(RegistrationMessage_URL).inner_text()
     assert ValidationText == "Your registration completed", "Registration failed"
     print("Text:", ValidationText, "found")
 
     #Clicks confirm button
     WaitClick(page, Confirm_URL)
-
 
     #Logs the user out
     WaitClick(page, Logout_URL)

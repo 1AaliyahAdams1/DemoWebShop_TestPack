@@ -8,7 +8,7 @@ def test_login(browser):
     login(page)
 
     #Validates that the user is logged in
-    ValidationText = page.locator("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(1) > a").inner_text()
+    ValidationText = page.locator(LoginMessage_URL).inner_text()
 
     email, password = getCredentials()
 

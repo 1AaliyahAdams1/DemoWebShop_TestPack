@@ -61,6 +61,12 @@ ExpirationDate_URL = '//select[@id="ExpireMonth"]'
 ExpirationYear_URL = '//select[@id="ExpireYear"]'
 CardCode_URL = '//input[@id="CardCode"]'
 
+OrderNumber_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div > div > div.page-body.checkout-data > div > ul > li:nth-child(1)"
+OrderConfirmation_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div > div > div.page-body.checkout-data > div > div.title > strong"
+CartItem_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div > div > div.page-body > div > form > table > tbody > tr > td.product > a"
+CartQuantity_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div > div > div.page-body > div > form > table > tbody > tr > td.qty.nobr > input"
+RegistrationMessage_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div.center-2 > div > div.page-body > div.result"
+LoginMessage_URL = "body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(1) > a"
 
 @pytest.fixture
 def browser():

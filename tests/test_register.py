@@ -1,39 +1,22 @@
-from conftest import *
-import json
+import pytest
+from conftest import generate_email, makeCredentials
+from data.test_data import First_Name, Last_Name, Password
+from pages.register_page import RegisterPage
+from pages.login_page import LoginPage
 
-New_Email = ""
-Password = "Tosca1234!"
 
-@pytest.mark.order(1)
-def test_register(browser):
-    page = browser.new_page()
-    page.goto("https://demowebshop.tricentis.com/")
+def test_register(page):
+    register_page = RegisterPage(page)
+    login_page    = LoginPage(page)
 
-    #Redirecting to register page
-    WaitClick(page, Register_URL)
+    email = generate_email()
 
-    #Filling the details
-    WaitClick(page, Gender_URL)
-    WaitFill(page, FName_URL, First_Name)
-    WaitFill(page, LName_URL, Last_Name)
+    register_page.navigate()
+    register_page.register(First_Name, Last_Name, email, Password)
+    register_page.assert_registration_success()
+    register_page.click_continue()
 
-    New_Email = GenerateEmail()
+    login_page.logout()
+    login_page.assert_logged_out()
 
-    WaitFill(page, Email_URL, New_Email)
-    WaitFill(page, Password_URL, Password)
-    WaitFill(page, CPassword_URL, Password)
-    WaitClick(page, Register2_URL)
-
-    #Checks that page has a success message for registration
-    ValidationText = page.locator(RegistrationMessage_URL).inner_text()
-    assert ValidationText == "Your registration completed", "Registration failed"
-    print("Text:", ValidationText, "found")
-
-    #Clicks confirm button
-    WaitClick(page, Confirm_URL)
-
-    #Logs the user out
-    WaitClick(page, Logout_URL)
-
-    #Saves credentials into a json file
-    makeCredentials(New_Email, Password)
+    makeCredentials(email, Password)

@@ -1,19 +1,15 @@
-from conftest import *
+import pytest
+from conftest import ensureCredentials
+from pages.login_page import LoginPage
 
-@pytest.mark.order(2)
-def test_login(browser):
-    page = browser.new_page()
-    page.goto("https://demowebshop.tricentis.com/")
 
-    login(page)
+def test_login(page):
+    email, password = ensureCredentials(page)
 
-    #Validates that the user is logged in
-    ValidationText = page.locator(LoginMessage_URL).inner_text()
+    login_page = LoginPage(page)
+    login_page.navigate()
+    login_page.login(email, password)
+    login_page.assert_logged_in(email)
 
-    email, password = getCredentials()
-
-    assert ValidationText == email, "Login failed"
-    print("Text:", ValidationText, "found")
-
-    #Logs the user out
-    WaitClick(page, Logout_URL)
+    login_page.logout()
+    login_page.assert_logged_out()

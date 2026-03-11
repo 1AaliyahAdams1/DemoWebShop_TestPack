@@ -1,73 +1,39 @@
-from conftest import *
+import pytest
+from conftest import ensureCredentials
+from data.test_data import *
+from pages.login_page import LoginPage
+from pages.checkout_page import CheckoutPage
 
-@pytest.mark.order(3)
-def test_checkout(browser):
-    page = browser.new_page()
-    page.goto("https://demowebshop.tricentis.com/")
 
-    #Login
-    login(page)
+def test_checkout(page):
+    email, password = ensureCredentials(page)
 
-    #Adding Item to Cart
-    WaitFill(page, SearchBar_URL, Search_Term)
-    WaitClick(page, SearchConfirm_URL)
-    WaitClick(page, Item_URL)
-    WaitClick(page, AddToCart_URL)
-    WaitClick(page, ShoppingCart_URL)
+    login_page    = LoginPage(page)
+    checkout_page = CheckoutPage(page)
 
-    #Validate Shopping Cart
-    Cartitem = page.locator(CartItem_URL).inner_text()
-    assert Cartitem == "Digital SLR Camera - Black", "Item not found"
+    # Login
+    login_page.navigate()
+    login_page.login(email, password)
+    login_page.assert_logged_in(email)
 
-    Quantity = page.locator(CartQuantity_URL).input_value()
-    assert Quantity == '1', "Quantity incorrect/missing"
+    # Add item to cart
+    checkout_page.search_and_open_product(Search_Term)
+    checkout_page.add_to_cart()
+    checkout_page.open_cart()
 
-    print(Cartitem, "found with quantity of ", Quantity)
+    # Validate cart
+    checkout_page.assert_cart_contains(Product_Name)
 
-    #Checking out Shopping Cart
-    WaitClick(page, TermsOfService_URL)
-    WaitClick(page, Checkout_URL)
+    # Checkout
+    checkout_page.proceed_to_checkout()
+    checkout_page.fill_billing_address(Country, City, Address1, ZipCode, Phone)
+    checkout_page.shipping_address()
+    checkout_page.shipping_method()
+    checkout_page.fill_payment_method()
+    checkout_page.fill_payment_info(CardType, CardHolder, CardNumber, ExpiryMonth, ExpiryYear, Code)
+    checkout_page.confirm_order()
+    checkout_page.assert_order_confirmed()
 
-    #Billing Address
-    try:
-        WaitClick(page, CountryDropDown_URL)
-        page.select_option(CountryDropDown_URL, value=Country)
-        WaitFill(page, City_URL, City)
-        WaitFill(page, Address1_URL, Address1)
-        WaitFill(page, ZipCode_URL, ZipCode)
-        WaitFill(page, Phone_URL, Phone)
-        WaitClick(page, Continue_URL)
-    except:
-        WaitClick(page, Continue_URL)
-
-    #Shipping Address -> Shipping Method
-    CounterWaitClick(page, Continue_URL)
-
-    #Payment Method
-    WaitClick(page, PaymentMethod_URL)
-    page.locator(Continue_URL).nth(3).click()
-
-    #Payment Information
-    WaitFill(page, CardHolder_URL, CardHolder)
-    WaitFill(page, CardNumber_URL, CardNumber)
-    WaitClick(page, ExpirationDate_URL)
-    page.select_option(ExpirationDate_URL, value= ExpiryMonth)
-    #WaitClick(page, ExpirationYear_URL)
-    #page.select_option(ExpirationYear_URL, value=ExpiryYear)
-    WaitFill(page, CardCode_URL, Code)
-    page.locator(Continue_URL).nth(4).click()
-
-    #Confirm Order
-    page.wait_for_selector(ConfirmOrder_URL)
-    page.click(ConfirmOrder_URL)
-
-    #Validate Confirm Order
-    OrderNumber = page.locator(OrderNumber_URL).inner_text()
-    OrderConfirmation = page.locator(OrderConfirmation_URL).inner_text()
-    assert OrderConfirmation == "Your order has been successfully processed!", "Order process failed"
-
-    print("Text:", OrderConfirmation ,"found with", OrderNumber)
-
-    #Logout
-    page.wait_for_selector(Logout_URL)
-    page.click(Logout_URL)
+    # Logout
+    login_page.logout()
+    login_page.assert_logged_out()

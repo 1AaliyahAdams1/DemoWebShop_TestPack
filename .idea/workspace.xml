@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4283262e-efb8-434c-af74-dfc248d14bfd" name="Changes" comment="moved all coded in xpaths into variables and neaten code">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Credentials.json" beforeDir="false" afterPath="$PROJECT_DIR$/Credentials.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="4283262e-efb8-434c-af74-dfc248d14bfd" name="Changes" comment="updated readme file">
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772724937246</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated readme file">
+      <option name="closed" value="true" />
+      <created>1773220086679</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1773220086679</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,6 +199,7 @@
     <MESSAGE value="updated ReadME file" />
     <MESSAGE value="updated checkout to have card payment" />
     <MESSAGE value="moved all coded in xpaths into variables and neaten code" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved all coded in xpaths into variables and neaten code" />
+    <MESSAGE value="updated readme file" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated readme file" />
   </component>
 </project>
